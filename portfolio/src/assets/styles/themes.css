@@ -1,0 +1,33 @@
+/* Светлая тема по умолчанию */
+:root {
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --primary-color: #42b883; /* Vue green */
+    --card-background: #f9f9f9;
+    --border-color: #eeeeee;
+    /* ... другие переменные ... */
+  }
+  
+  /* Темная тема */
+  html.dark {
+    --background-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --primary-color: #42b883;
+    --card-background: #2a2a2a;
+    --border-color: #444444;
+    /* ... другие переменные ... */
+  }
+  
+  /* Базовые стили с использованием переменных */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+    font-family: sans-serif;
+    margin: 0;
+  }
+  
+  a {
+    color: var(--primary-color);
+  }
+  /* ... другие общие стили ... */

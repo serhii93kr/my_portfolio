@@ -78,4 +78,36 @@
         color: var(--title-color);
         font-family: 'NunitoBold', sans-serif;
     }
+
+    /* Project card mobile styles */
+    .project-card {
+        margin: 0 8px;
+    }
+
+    .project-content {
+        padding: 12px;
+    }
+
+    .project-title {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .project-description {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .project-tag {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .project-img {
+        height: 180px;
+    }
+
+    .project-links {
+        font-size: 12px;
+    }
 }

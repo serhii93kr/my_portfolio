@@ -5,9 +5,10 @@ const {t} = useI18n(); // подключаем $t для переводов
 
 import { useHead } from '@vueuse/head';
 import Projects from '@/views/Projects.vue';
-import AboutMe  from "@/views/AboutMe.vue";
+import AboutMe from '@/views/AboutMe.vue';
 import Hero from '@/views/Hero.vue';
-import BottomBar  from "@/views/BottomBar.vue";
+import BottomBar from '@/views/BottomBar.vue';
+
 useHead({
   title: 'Главная | Мое Портфолио', // Динамический title
   meta: [

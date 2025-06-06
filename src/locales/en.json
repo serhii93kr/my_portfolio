@@ -1,0 +1,131 @@
+{
+  "navigation": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "name": "Developer"
+  },
+  "home": {
+    "title": "Welcome!",
+    "description": "Welcome to my portfolio website!"
+  },
+  "hero": {
+    "title": "Hello, my name is Serhii. \uD83E\uDD19",
+    "subtitle": "I develop and maintain WordPress websites and mobile applications — from idea to launch."
+  },
+  "blog": {
+    "title": "Blog",
+    "read_more" : "Read more",
+    "other_projects": "Other projects",
+    "description": "My blog is a collection of articles, tutorials, and insights on web and mobile development. I share my experiences, tips, and tricks to help you navigate the world of technology."
+  },
+
+  "project": {
+    "title": "My\nprojects Mobile",
+    "title_site": "Web\nprojects",
+    "go_to_site": "Visit Website"
+  },
+  "contact": {
+    "title": "Contact Information",
+    "subtitle": "Feel free to reach out through the form below:",
+    "form": {
+      "name": "Your Name",
+      "name_placeholder": "Enter your name",
+      "email": "Email Address",
+      "email_placeholder": "Enter your email",
+      "message": "Message",
+      "message_placeholder": "Type your message here",
+      "submit": "Send Message"
+    },
+    "social": {
+      "github": "GitHub",
+      "telegram": "Telegram"
+    }
+  },
+  "obout": {
+    "title": "Про мене",
+    "description": "Hi! I'm Serhii, a passionate software developer with over 5 years of professional experience — and even more years of genuine curiosity. My journey in programming began back in 2008 with web templates and HTML/CSS, later evolving into full-stack web development with JavaScript and PHP. I've built custom CMS platforms, optimized and customized over 30 WordPress sites, and developed several commercial Android apps — one of which surpassed 12,000 downloads on Google Play.\n\nIn recent years, I've focused heavily on mobile development using Kotlin and Flutter, creating apps for e-commerce and AI-powered tools with ChatGPT API. I also have experience building Chrome extensions, working with microcontrollers (Arduino, ESP8266), and integrating modern AI technologies.\n\nI love turning ideas into working products — clean, efficient, and user-focused."
+  },
+  "future": {
+    "title": "Got an idea?",
+    "description": "Let's bring it to life together!"
+  },
+  "pricing": {
+    "title": "Development Rates",
+    "subtitle": "Choose the right package for your project",
+    "popular": "Popular Packages",
+    "web": {
+      "title": "Web Development",
+      "support": {
+        "title": "Support",
+        "description": "Basic package for maintaining existing projects",
+        "price": "from $4.8",
+        "features": {
+          "support": "Technical support",
+          "bugfixes": "Bug fixes",
+          "updates": "Minor updates"
+        }
+      },
+      "mvp": {
+        "title": "MVP",
+        "description": "Perfect solution for startups and new projects",
+        "price": "from $3.8",
+        "features": {
+          "development": "MVP development",
+          "design": "Basic design",
+          "documentation": "Technical documentation",
+          "support": "3 months of support"
+        }
+      },
+      "maximum": {
+        "title": "Maximum",
+        "description": "Full development cycle with advanced features",
+        "price": "from $3.5",
+        "features": {
+          "development": "Full development cycle",
+          "design": "Premium design",
+          "testing": "Testing and optimization",
+          "support": "1 year of support"
+        }
+      }
+    },
+    "mobile": {
+      "title": "Mobile Development",
+      "support": {
+        "title": "Support",
+        "description": "Basic package for maintaining existing projects",
+        "price": "from $6.75",
+        "features": {
+          "support": "Technical support",
+          "bugfixes": "Bug fixes",
+          "updates": "Minor updates"
+        }
+      },
+      "mvp": {
+        "title": "MVP",
+        "description": "Perfect solution for startups and new projects",
+        "price": "from $6",
+        "features": {
+          "development": "MVP development",
+          "design": "Basic design",
+          "documentation": "Technical documentation",
+          "support": "3 months of support"
+        }
+      },
+      "maximum": {
+        "title": "Maximum",
+        "description": "Full development cycle with advanced features",
+        "price": "from $5.5",
+        "features": {
+          "development": "Full development cycle",
+          "testing": "Testing and optimization",
+          "support": "1 year of support"
+        }
+      }
+    },
+    "contact": "Contact via Telegram",
+    "per_hour": " / hour"
+  }
+}

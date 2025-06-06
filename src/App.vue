@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app-wrapper">
+    <AppHeader />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <!-- Оборачиваем компонент в дополнительный контейнер -->
+        <div>
+          <component :is="Component" />
+        </div>
+      </transition>
+    </router-view>
+
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import AppHeader from './components/AppHeader.vue';
+import { useThemeStore } from './store/theme';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const themeStore = useThemeStore();
+themeStore.initializeTheme();
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* Стили для плавного перехода */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

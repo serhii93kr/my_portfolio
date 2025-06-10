@@ -1,81 +1,128 @@
 @media (max-width: 768px) {
     .mobile-menu-btn {
         display: block;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
     }
 
     .menu {
         display: none;
         flex-direction: column;
-        position: absolute;
-        top: 70px;
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
+        bottom: 0;
         background-color: var(--bg-color);
-        padding: 20px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        padding: 80px 20px 20px;
+        z-index: 1000;
+        height: 100vh;
     }
 
+    .menu.active .desktop-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
+    }
 
     .menu.active .desktop-menu a {
         font-size: 24px;
         width: 100%;
         text-align: start;
-        margin-left: 32px;
-    }
-    .menu.active .desktop-menu {
-        display: flex;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        width: 100%;
-        /* text-align: end; */
+        padding: 12px 0;
     }
 
     .menu.active {
         display: flex;
     }
 
-    .about-content {
-        flex-direction: column;
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p {
-        font-size: 18px;
+    .container {
+        padding: 0 16px;
     }
 
     .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background: linear-gradient(77deg, #FBED96 0%, #ABECD6 100%);
-        border-radius: 22px;
-        margin: 30px 16px 30px 16px;
+        margin: 16px;
+        padding: 24px 16px;
     }
 
     .hero .container h1 {
-        font-size: 22px;
-        font-family: 'NunitoRegular', sans-serif;
-        color: var(--title-color);
+        font-size: 24px;
+        line-height: 1.3;
     }
 
     .hero .container p {
-        font-size: 32px;
-        margin: 0 auto;
-        color: var(--title-color);
-        font-family: 'NunitoBold', sans-serif;
-        text-align: center;
+        font-size: 18px;
+        line-height: 1.4;
     }
 
     h2.section-title {
-        text-align: start;
-        font-size: 42px;
-        margin-bottom: 0px;
-        color: var(--title-color);
-        font-family: 'NunitoBold', sans-serif;
+        font-size: 28px;
+        line-height: 1.3;
+        margin-bottom: 24px;
+    }
+
+    /* Project card mobile styles */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .project-card {
+        margin: 0;
+        border-radius: 12px;
+    }
+
+    .project-content {
+        padding: 16px;
+    }
+
+    .project-title {
+        font-size: 18px;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+
+    .project-description {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+
+    .project-tag {
+        font-size: 12px;
+        padding: 6px 12px;
+        margin-bottom: 8px;
+    }
+
+    .project-img {
+        height: 200px;
+    }
+
+    .project-links {
+        font-size: 14px;
+        margin-top: 16px;
+    }
+
+    .project-links a {
+        padding: 8px 0;
+    }
+
+    /* About section mobile styles */
+    .about-content {
+        padding: 24px 16px;
+    }
+
+    .about-text {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    /* Bottom bar mobile styles */
+    footer.bottom-bar {
+        padding: 24px 16px;
+        margin-top: 32px;
     }
 }

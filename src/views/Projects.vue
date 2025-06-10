@@ -6,7 +6,7 @@
           v-html="t('project.title').replace(/\n/g, '<br>')"
       />
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-4 sm:pt-6 lg:pt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
         <div
             class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform transition-all duration-300"
             v-for="(item, index) in projects"
@@ -66,7 +66,7 @@
           class="section-title title text-center pt-8"
           v-html="t('project.title_site').replace(/\n/g, '<br>')"
       />
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-4 sm:pt-6 lg:pt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
         <div
             class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform transition-all duration-300"
             v-for="(item, index) in web_projects"

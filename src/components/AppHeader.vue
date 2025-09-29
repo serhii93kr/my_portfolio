@@ -1,15 +1,14 @@
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useThemeStore } from '../store/theme';
-import { useMq } from 'vue-mq';
 import { setLocale } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
 
 const { t, locale } = useI18n();
 const themeStore = useThemeStore();
-const mq = useMq();
+const mq = inject('mq'); // ✅ реактивный объект с текущим breakpoint
 
 const isMenuOpen = ref(false);
 const isDark = computed(() => themeStore.isDark);
@@ -20,16 +19,12 @@ const toggleTheme = () => {
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-  if (isMenuOpen.value) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
+  document.body.style.overflow = isMenuOpen.value ? 'hidden' : '';
 };
 
 // Закрываем меню при изменении размера экрана
-watch(() => mq.mobile, (isMobile) => {
-  if (!isMobile) {
+watch(() => mq.value, (current) => {
+  if (current !== 'mobile') {
     isMenuOpen.value = false;
     document.body.style.overflow = '';
   }
@@ -60,12 +55,12 @@ const changeLanguage = (lang) => {
     <nav class="container mx-auto px-4">
       <div class="flex justify-between items-center">
         <router-link to="/" class="logo">Portfolio</router-link>
-        
-        <button 
-          v-if="mq.mobile" 
-          class="mobile-menu-btn"
-          @click="toggleMenu"
-          :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
+
+        <button
+            v-if="mq.value === 'mobile'"
+            class="mobile-menu-btn"
+            @click="toggleMenu"
+            :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
         >
           <span v-if="!isMenuOpen">☰</span>
           <span v-else>✕</span>
@@ -92,6 +87,7 @@ const changeLanguage = (lang) => {
     </nav>
   </header>
 </template>
+
 
 <style scoped>
 .header {

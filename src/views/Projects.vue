@@ -135,7 +135,7 @@ import {projects} from '@/data/projects';
 import {web_projects} from '@/data/web_projects';
 import {useI18n} from 'vue-i18n';
 import {getImageUrl} from '@/utils/helpers';
-import { useMq } from '@/utils/mq';
+import { useMq } from '@/utils/mq.js';
 
 const {t, locale} = useI18n();
 const mq = useMq();

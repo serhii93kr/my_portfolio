@@ -149,4 +149,18 @@
       }
     }
   }
+  ,
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": "How can I order development?",
+    "a1": "You can leave a request via the contact form or write to me directly. After discussing your requirements, I will prepare a proposal and a work plan.",
+    "q2": "What types of projects do you implement?",
+    "a2": "I work with WordPress and other CMS: creating websites from scratch, developing themes and plugins, integrations with third-party services. I also develop mobile applications for iOS and Android.",
+    "q3": "How long does development take?",
+    "a3": "It depends on the scope and complexity. A simple website can be launched in 1–2 weeks; complex solutions may take several months.",
+    "q4": "Do you provide support after launch?",
+    "a4": "Yes, I provide technical support, updates and improvements after launch.",
+    "q5": "Which technologies do you use?",
+    "a5": "In web development: WordPress, WooCommerce, PHP, JavaScript, HTML/CSS, Bootstrap. In mobile: Kotlin, Flutter. I select the stack for the task."
+  }
 }

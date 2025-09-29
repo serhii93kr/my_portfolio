@@ -10,6 +10,7 @@ import Hero from '@/views/Hero.vue';
 import BottomBar  from "@/views/BottomBar.vue";
 import ProjectsSupportCounter from "@/components/ProjectsSupportCounter.vue";
 import ProductSteps from "@/components/ProductSteps.vue";
+import FaqAccordion from "@/components/FaqAccordion.vue";
 useHead({
   title: 'Главная | Мое Портфолио', // Динамический title
   meta: [
@@ -39,7 +40,11 @@ useHead({
 
     <Projects />
     <ProductSteps />
+    <section class="container">
+      <FaqAccordion :expandFirst="true" :allowOne="true" />
+    </section>
     <AboutMe />
+
     <BottomBar />
   </main>
 </template>

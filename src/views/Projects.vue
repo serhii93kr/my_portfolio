@@ -1,14 +1,15 @@
 <template>
   <section class="projects" id="projects">
-    <div class="container mx-auto px-4 py-8">
+    <div class="container">
       <h2
-          class="section-title title text-center pt-8"
+          class="section-title title"
+          :class="paddingSize"
           v-html="t('project.title').replace(/\n/g, '<br>')"
       />
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
+      <div class="projects-grid" :class="[gridCols, gapSize, paddingSize]">
         <div
-            class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform transition-all duration-300"
+            class="project-card"
             v-for="(item, index) in projects"
             :key="index"
         >
@@ -18,43 +19,43 @@
           >
             <div class="card-inner">
               <img
-                  class="project-img w-full h-48 object-cover"
+                  class="project-img"
                   :src="getImageUrl(item.image)"
                   :alt="item.title[locale]"
               />
 
-              <div class="project-content p-4">
-                <h3 class="project-title title text-xl font-semibold mb-2">{{ item.title[locale] }}</h3>
+              <div class="project-content">
+                <h3 class="project-title">{{ item.title[locale] }}</h3>
 
-                <hr class="my-2 border-t border-gray-300"/>
+                <hr class="divider"/>
 
-                <p class="project-description text-gray-700 mb-4">
+                <p class="project-description">
                   {{ item.description[locale] }}
                 </p>
-                <div class="project-tags mb-2">
+                <div class="project-tags">
                   <span
-                      class="project-tag inline-block bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded mr-2 mb-2"
+                      class="project-tag"
                       v-for="(tag, tagIndex) in item.tags"
                       :key="tagIndex"
                   >
                     {{ tag }}
                   </span>
                 </div>
-                <div class="project-links flex justify-between text-blue-600 text-sm">
+                <div class="project-links">
                   <span v-if="item.github">
-                    <a :href="item.github" target="_blank" class="hover:underline">GitHub 🔗</a>
+                    <a :href="item.github" target="_blank" class="hover-underline">GitHub 🔗</a>
                   </span>
 
                   <span v-if="item.link">
-                <a
-                    :href="item.link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link inline-block mt-2 text-blue-600 hover:underline text-sm font-medium"
-                >
-                  Play Market →
-                </a>
-              </span>
+                    <a
+                        :href="item.link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                      Play Market →
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
@@ -63,39 +64,40 @@
       </div>
 
       <h2
-          class="section-title title text-center pt-8"
+          class="section-title title"
+          :class="paddingSize"
           v-html="t('project.title_site').replace(/\n/g, '<br>')"
       />
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
+      <div class="projects-grid" :class="[gridCols, gapSize, paddingSize]">
         <div
-            class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform transition-all duration-300"
+            class="project-card"
             v-for="(item, index) in web_projects"
             :key="index"
         >
           <div class="card-inner">
             <img
-                class="project-img w-full h-48 object-cover"
+                class="project-img"
                 :src="getImageUrl(item.image)"
                 :alt="item.title[locale]"
             />
 
-            <div class="project-content p-4">
-              <h3 class="project-title text-xl font-semibold mb-2">{{ item.title[locale] }}</h3>
+            <div class="project-content">
+              <h3 class="project-title">{{ item.title[locale] }}</h3>
 
-              <p class="project-description text-gray-700 mb-4">
+              <p class="project-description">
                 {{ item.description[locale] }}
               </p>
 
-              <hr class="my-2 border-t border-gray-300"/>
+              <hr class="divider"/>
 
               <p
-                  class="project-description text-gray-700 mb-4"
+                  class="project-description"
                   v-html="item.fullDescription[locale].replace(/\n/g, '<br>')"
               />
 
-              <div class="project-tags mb-2">
+              <div class="project-tags">
                 <span
-                    class="project-tag inline-block bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded mr-2 mb-2"
+                    class="project-tag"
                     v-for="(tag, tagIndex) in item.tags"
                     :key="tagIndex"
                 >
@@ -103,21 +105,21 @@
                 </span>
               </div>
 
-              <div class="project-links flex justify-between text-blue-600 text-sm">
+              <div class="project-links">
                 <span v-if="item.github">
-                  <a :href="item.github" target="_blank" class="hover:underline">GitHub 🔗</a>
+                  <a :href="item.github" target="_blank" class="hover-underline">GitHub 🔗</a>
                 </span>
 
                 <span v-if="item.link">
-                <a
-                    :href="item.link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link inline-block mt-2 text-blue-600 hover:underline text-sm font-medium"
-                >
-                  {{ t('project.go_to_site') }} →
-                </a>
-              </span>
+                  <a
+                      :href="item.link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-link"
+                  >
+                    {{ t('project.go_to_site') }} →
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -133,26 +135,99 @@ import {projects} from '@/data/projects';
 import {web_projects} from '@/data/web_projects';
 import {useI18n} from 'vue-i18n';
 import {getImageUrl} from '@/utils/helpers';
+import { useMq } from 'vue-mq';
 
 const {t, locale} = useI18n();
+const mq = useMq();
 
-const itemsPerPage = ref(getItemsPerPage())
-const currentPage = ref(0)
+const gridCols = computed(() => {
+  if (mq.xl) return 'grid-cols-3';
+  if (mq.lg) return 'grid-cols-2';
+  return 'grid-cols-1';
+});
 
-function getItemsPerPage() {
-  return window.innerWidth < 768 ? 1 : 3
-}
+const gapSize = computed(() => {
+  if (mq.xl) return 'gap-8';
+  if (mq.lg) return 'gap-6';
+  return 'gap-4';
+});
 
-window.addEventListener('resize', () => {
-  itemsPerPage.value = getItemsPerPage()
-  currentPage.value = 0
-})
+const paddingSize = computed(() => {
+  if (mq.xl) return 'pt-8';
+  if (mq.lg) return 'pt-6';
+  return 'pt-4';
+});
 </script>
 
 <style scoped>
+.projects {
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.projects-grid {
+  display: grid;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Base grid layout for mobile first */
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
+}
+
 .project-card {
+  background-color: var(--card-bg);
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  width: 100%;
+}
+
+.card-inner {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .card-inner:hover {
@@ -161,16 +236,34 @@ window.addEventListener('resize', () => {
 
 .project-img {
   width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
 }
 
 .project-content {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .project-title {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  color: var(--title-color);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 0.5rem 0;
+}
+
+.project-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin-bottom: 1rem;
 }
 
 .project-tags {
@@ -180,10 +273,117 @@ window.addEventListener('resize', () => {
   margin-bottom: 0.5rem;
 }
 
+.project-tag {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.project-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  font-size: 0.875rem;
+}
+
+.project-link,
+.hover-underline {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-img {
+    height: 220px;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+  }
+
+  .project-description {
+    font-size: 1rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .project-img {
+    height: 240px;
+  }
+
+  .project-title {
+    font-size: 1.3rem;
+  }
+
+  .project-description {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 767px) {
-  .card-inner {
-    width: 100%;
-    box-sizing: border-box;
+  .projects {
+    padding: 1rem 0;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .project-card {
+    margin: 0;
+  }
+
+  .project-content {
+    padding: 0.75rem;
+  }
+
+  .project-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-description {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .project-links {
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
+
+  .project-img {
+    height: 180px;
   }
 }
 </style>

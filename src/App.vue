@@ -3,22 +3,30 @@
     <AppHeader />
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
-        <!-- Оборачиваем компонент в дополнительный контейнер -->
         <div>
           <component :is="Component" />
         </div>
       </transition>
     </router-view>
-
   </div>
 </template>
 
 <script setup>
 import AppHeader from './components/AppHeader.vue';
 import { useThemeStore } from './store/theme';
+import { provide, onMounted } from 'vue';
+import { mq, initMq } from './composables/useMq';
 
 const themeStore = useThemeStore();
 themeStore.initializeTheme();
+
+// Инициализируем слежение за шириной окна
+onMounted(() => {
+  initMq();
+});
+
+// Делаем mq доступным через inject
+provide('mq', mq);
 </script>
 
 <style>

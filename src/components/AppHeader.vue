@@ -1,145 +1,116 @@
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, inject } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useThemeStore } from '../store/theme';
 import { setLocale } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
 
-const { t, locale } = useI18n();
-const themeStore = useThemeStore();
-const mq = inject('mq'); // ✅ реактивный объект с текущим breakpoint
+const { t } = useI18n();
+const menuActive = ref(false);
+const currentLanguage = ref(localStorage.getItem('locale') || 'en');
 
-const isMenuOpen = ref(false);
-const isDark = computed(() => themeStore.isDark);
+// Theme store
+const themeStore = useThemeStore();
+
+const isDarkTheme = computed(() => {
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return themeStore.currentTheme === 'dark' || (themeStore.currentTheme === 'system' && systemPrefersDark);
+});
 
 const toggleTheme = () => {
-  themeStore.toggleTheme();
+  const newTheme = themeStore.currentTheme === 'light' ? 'dark' : 'light';
+  themeStore.setTheme(newTheme);
+  document.documentElement.classList.toggle('dark', newTheme === 'dark');
 };
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-  document.body.style.overflow = isMenuOpen.value ? 'hidden' : '';
+  menuActive.value = !menuActive.value;
 };
 
-// Закрываем меню при изменении размера экрана
-watch(() => mq.value, (current) => {
-  if (current !== 'mobile') {
-    isMenuOpen.value = false;
-    document.body.style.overflow = '';
-  }
-});
-
-// Закрываем меню при клике вне меню
-onMounted(() => {
-  document.addEventListener('click', (e) => {
-    if (isMenuOpen.value && !e.target.closest('.menu') && !e.target.closest('.mobile-menu-btn')) {
-      isMenuOpen.value = false;
-      document.body.style.overflow = '';
-    }
-  });
-});
-
-onUnmounted(() => {
-  document.body.style.overflow = '';
-});
-
 const changeLanguage = (lang) => {
-  locale.value = lang;
+  currentLanguage.value = lang;
   setLocale(lang);
 };
 </script>
 
 <template>
-  <header class="header">
-    <nav class="container mx-auto px-4">
-      <div class="flex justify-between items-center">
-        <router-link to="/" class="logo">Portfolio</router-link>
+  <header class="app-header bg-white dark:bg-gray-900 shadow-sm">
+    <div class="container mx-auto px-4">
+      <nav class="flex items-center justify-between h-16">
+        <div class="logo text-xl font-bold text-gray-900 dark:text-white">
+          {{ t('navigation.name') }}
+        </div>
 
         <button
-            v-if="mq.value === 'mobile'"
-            class="mobile-menu-btn"
+            class="mobile-menu-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300"
             @click="toggleMenu"
-            :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
         >
-          <span v-if="!isMenuOpen">☰</span>
-          <span v-else>✕</span>
+          <span class="text-2xl">≡</span>
         </button>
 
-        <div class="menu" :class="{ 'active': isMenuOpen }">
-          <div class="desktop-menu">
-            <router-link to="/" class="menu-item">{{ t('menu.home') }}</router-link>
-            <router-link to="/blog" class="menu-item">{{ t('menu.blog') }}</router-link>
-            <router-link to="/contact" class="menu-item">{{ t('menu.contact') }}</router-link>
+        <div
+            class="menu flex items-center space-x-4"
+            :class="{ 'active': menuActive }"
+        >
+          <div class="desktop-menu flex md:flex-wrap items-center space-x-6">
+            <router-link
+                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                to="/"
+                @click="menuActive = false"
+            >
+              {{ t('navigation.home') }}
+            </router-link>
+            <router-link
+                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                to="/blog"
+                @click="menuActive = false"
+            >
+              {{ t('navigation.blog') }}
+            </router-link>
+            <router-link
+                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                to="/pricing"
+                @click="menuActive = false"
+            >
+              {{ t('navigation.pricing') }}
+            </router-link>
+            <router-link
+                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                to="/contact"
+                @click="menuActive = false"
+            >
+              {{ t('navigation.contact') }}
+            </router-link>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button
+                class="theme-toggle p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                @click="toggleTheme"
+                :title="isDarkTheme ? t('theme.light_mode') : t('theme.dark_mode')"
+            >
+              <span class="text-xl">{{ isDarkTheme ? '☀️' : '🌙' }}</span>
+            </button>
+
+            <select
+                class="lang-switch bg-transparent border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+                v-model="currentLanguage"
+                @change="changeLanguage(currentLanguage)"
+            >
+              <option value="uk">Українська</option>
+              <option value="en">English</option>
+            </select>
           </div>
         </div>
-
-        <div class="flex items-center gap-4">
-          <button class="theme-toggle" @click="toggleTheme">
-            {{ isDark ? '☀️' : '🌙' }}
-          </button>
-          <select v-model="locale" class="lang-switch">
-            <option value="ru">RU</option>
-            <option value="en">EN</option>
-          </select>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </header>
 </template>
 
-
 <style scoped>
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: var(--bg-color);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+/* Mobile menu styles */
 
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--text-color);
-  padding: 8px;
-}
-
-@media (max-width: 768px) {
-  .mobile-menu-btn {
-    display: block;
-  }
-
-  .menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--bg-color);
-    padding: 80px 20px 20px;
-    z-index: 999;
-  }
-
-  .menu.active {
-    display: block;
-  }
-
-  .desktop-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .desktop-menu a {
-    font-size: 24px;
-    padding: 12px 0;
-  }
-}
 
 /* Dark mode styles */
 .dark .app-header,

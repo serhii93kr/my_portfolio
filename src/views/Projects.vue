@@ -130,14 +130,13 @@
 </template>
 
 <script setup>
-import {ref, computed} from 'vue'
-import {projects} from '@/data/projects';
-import {web_projects} from '@/data/web_projects';
-import {useI18n} from 'vue-i18n';
-import {getImageUrl} from '@/utils/helpers';
-// Local responsive composable to avoid external file dependency during build
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { projects } from '@/data/projects';
+import { web_projects } from '@/data/web_projects';
+import { useI18n } from 'vue-i18n';
+import { getImageUrl } from '@/utils/helpers';
 
+// Local responsive composable
 function useMq() {
   const width = ref(0);
 
@@ -161,7 +160,7 @@ function useMq() {
   };
 }
 
-const {t, locale} = useI18n();
+const { t, locale } = useI18n();
 const mq = useMq();
 
 const gridCols = computed(() => {

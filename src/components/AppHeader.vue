@@ -26,6 +26,12 @@ const toggleTheme = () => {
 
 const toggleMenu = () => {
   menuActive.value = !menuActive.value;
+  document.body.style.overflow = menuActive.value ? 'hidden' : '';
+};
+
+const closeMenu = () => {
+  menuActive.value = false;
+  document.body.style.overflow = '';
 };
 
 const changeLanguage = (lang) => {
@@ -45,44 +51,57 @@ const changeLanguage = (lang) => {
         <button
             class="mobile-menu-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300"
             @click="toggleMenu"
+            :aria-expanded="menuActive ? 'true' : 'false'"
+            aria-controls="mobile-menu"
+            :aria-label="menuActive ? t('navigation.close_menu') : t('navigation.open_menu')"
         >
-          <span class="text-2xl">≡</span>
+          <span class="sr-only">Menu</span>
+          <span class="text-2xl transition-transform duration-300" :class="{ 'rotate-90': menuActive }">≡</span>
         </button>
 
+        <!-- Overlay -->
         <div
+            class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity md:hidden"
+            :class="{ 'opacity-100 pointer-events-auto': menuActive }"
+            @click="closeMenu"
+        />
+
+        <div
+            id="mobile-menu"
             class="menu flex items-center space-x-4"
             :class="{ 'active': menuActive }"
         >
-          <div class="desktop-menu flex md:flex-wrap items-center space-x-6">
+          <div class="desktop-menu flex md:flex-wrap items-center gap-6">
             <router-link
-                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 to="/"
-                @click="menuActive = false"
+                @click="closeMenu"
             >
               {{ t('navigation.home') }}
             </router-link>
             <router-link
-                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 to="/blog"
-                @click="menuActive = false"
+                @click="closeMenu"
             >
               {{ t('navigation.blog') }}
             </router-link>
             <router-link
-                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 to="/pricing"
-                @click="menuActive = false"
+                @click="closeMenu"
             >
               {{ t('navigation.pricing') }}
             </router-link>
             <router-link
-                class="menu-item text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 to="/contact"
-                @click="menuActive = false"
+                @click="closeMenu"
             >
               {{ t('navigation.contact') }}
             </router-link>
           </div>
+
 
           <div class="flex items-center space-x-4">
             <button
@@ -96,7 +115,7 @@ const changeLanguage = (lang) => {
             <select
                 class="lang-switch bg-transparent border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
                 v-model="currentLanguage"
-                @change="changeLanguage(currentLanguage)"
+                @change="(e) => { changeLanguage(currentLanguage); closeMenu(); }"
             >
               <option value="uk">Українська</option>
               <option value="en">English</option>

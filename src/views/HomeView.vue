@@ -8,6 +8,8 @@ import Projects from '@/views/Projects.vue';
 import AboutMe  from "@/views/AboutMe.vue";
 import Hero from '@/views/Hero.vue';
 import BottomBar  from "@/views/BottomBar.vue";
+import ProjectsSupportCounter from "@/components/ProjectsSupportCounter.vue";
+import ProductSteps from "@/components/ProductSteps.vue";
 useHead({
   title: 'Главная | Мое Портфолио', // Динамический title
   meta: [
@@ -25,7 +27,18 @@ useHead({
       image="Memoji round.png"
       :showImage = "false"
     />
+
+<!--    <section class="container mx-auto px-4 py-8">-->
+<!--      <ProjectsSupportCounter-->
+<!--          :count="54"-->
+<!--          label="Проектов на поддержке"-->
+<!--          suffix="+"-->
+<!--          :durationMs="1800"-->
+<!--      />-->
+<!--    </section>-->
+
     <Projects />
+    <ProductSteps />
     <AboutMe />
     <BottomBar />
   </main>

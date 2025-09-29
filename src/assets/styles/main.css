@@ -601,3 +601,13 @@ footer {
     color: var(--title-color);
     font-family: 'NunitoBold', sans-serif;
 }
+
+/* для обычной темы ничего не меняем */
+.step-card img {
+    transition: filter 0.3s ease;
+}
+
+/* для тёмной темы делаем светлее */
+.dark .step-card img {
+    filter: brightness(0.85) invert(0.85);
+}

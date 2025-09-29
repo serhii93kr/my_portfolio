@@ -127,5 +127,26 @@
     },
     "contact": "Contact via Telegram",
     "per_hour": " / hour"
+  },
+  "productSteps": {
+    "title": "Product Creation Stages",
+    "description": "Every IT solution is based on a consistent process. We move step by step: discussing the idea, designing the concept, testing the MVP, and launching the finished product into the world.",
+    "steps": {
+      "discussion": {
+        "number": "Step 01",
+        "title": "Discussion",
+        "description": "At this stage, we gather ideas, share thoughts, and define the key needs of the future product. It’s a space for discussions, questions, and finding solutions. Together we shape the vision that will become the foundation for the next steps."
+      },
+      "design": {
+        "number": "Step 02",
+        "title": "Design",
+        "description": "Here the plan is born. We create the structure, think through the logic, and define the appearance of the product. This stage helps us understand how the solution will look and function even before development begins."
+      },
+      "mvp": {
+        "number": "Step 03",
+        "title": "MVP",
+        "description": "The Minimum Viable Product allows us to bring the core features to life. It’s a working version that helps validate hypotheses, test the idea with real users, and gather valuable feedback."
+      }
+    }
   }
 }

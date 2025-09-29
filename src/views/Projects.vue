@@ -135,7 +135,31 @@ import {projects} from '@/data/projects';
 import {web_projects} from '@/data/web_projects';
 import {useI18n} from 'vue-i18n';
 import {getImageUrl} from '@/utils/helpers';
-import { useMq } from '@/utils/mq.js';
+// Local responsive composable to avoid external file dependency during build
+import { ref, onMounted, onUnmounted } from 'vue';
+
+function useMq() {
+  const width = ref(0);
+
+  function updateWidth() {
+    if (typeof window === 'undefined') return;
+    width.value = window.innerWidth;
+  }
+
+  onMounted(() => {
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', updateWidth);
+  });
+
+  return {
+    get lg() { return width.value >= 1024; },
+    get xl() { return width.value >= 1280; }
+  };
+}
 
 const {t, locale} = useI18n();
 const mq = useMq();

@@ -163,4 +163,34 @@
     "q5": "Which technologies do you use?",
     "a5": "In web development: WordPress, WooCommerce, PHP, JavaScript, HTML/CSS, Bootstrap. In mobile: Kotlin, Flutter. I select the stack for the task."
   }
+  ,
+  "services": {
+    "webdev": {
+      "section": "Web Development",
+      "title": "Development and support for WordPress and other CMS",
+      "p1": "I offer a full range of solutions for WordPress and other CMS: from creating custom plugins and themes to third-party integrations and ongoing support.",
+      "p2": "Optimize your site, automate processes, and achieve more results with less hassle.",
+      "p3": "P.S. Other CMS – after discussing the scope.",
+      "bullets": {
+        "php_fixes": "PHP error fixes",
+        "speedup": "Site performance optimization",
+        "plugins": "Custom plugins",
+        "themes": "Theme improvements",
+        "integrations": "Integrations",
+        "other": "Other"
+      }
+    },
+    "mobiledev": {
+      "section": "Mobile Development",
+      "title": "Development and support for mobile apps. Kotlin or Flutter",
+      "p1": "I offer a full range of solutions for mobile apps: from maintaining legacy stacks to building production-ready apps for Android and iOS.",
+      "p2": "P.S. Native development is Android-only. For iOS and Android I use Flutter.",
+      "bullets": {
+        "modern": "Modern technologies",
+        "architecture": "Clean architecture",
+        "maintainable": "Maintainable code",
+        "docs": "Documentation"
+      }
+    }
+  }
 }

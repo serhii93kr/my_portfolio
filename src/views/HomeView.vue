@@ -11,6 +11,7 @@ import BottomBar  from "@/views/BottomBar.vue";
 import ProjectsSupportCounter from "@/components/ProjectsSupportCounter.vue";
 import ProductSteps from "@/components/ProductSteps.vue";
 import FaqAccordion from "@/components/FaqAccordion.vue";
+import ProjectStagesAnimation from "@/components/ProjectStagesAnimation.vue";
 useHead({
   title: 'Главная | Мое Портфолио', // Динамический title
   meta: [
@@ -37,6 +38,10 @@ useHead({
 <!--          :durationMs="1800"-->
 <!--      />-->
 <!--    </section>-->
+
+
+      <ProjectStagesAnimation :step-duration-ms="1600" :autoplay="true" :loop="true" />
+
 
     <Projects />
     <ProductSteps />

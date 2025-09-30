@@ -1,11 +1,20 @@
 <template>
   <section class="projects" id="projects">
+    <SliderRightWithContent/>
     <div class="container">
-      <h2
-          class="section-title title"
-          :class="paddingSize"
-          v-html="t('project.title').replace(/\n/g, '<br>')"
-      />
+      <div class="flex justify-between">
+        <h2
+            class="section-title title"
+            :class="paddingSize"
+            v-html="t('project.title').replace(/\n/g, '<br>')"
+        />
+        <div class="place-self-center flex flex-col items-center">
+          <span class="bg-orange-500 p-2 rounded-xl text-3xl text-white font-semibold">От 350 грн / час</span>
+          <router-link to="/contact" class="mt-2 underline text-blue-600 hover:text-blue-800 text-center">
+            Заказать услугу
+          </router-link>
+        </div>
+      </div>
 
       <div class="projects-grid" :class="[gridCols, gapSize, paddingSize]">
         <div
@@ -62,12 +71,23 @@
           </router-link>
         </div>
       </div>
+    </div>
+    <SliderLeftWithContent/>
+    <div class="container">
+      <div class="flex justify-between">
+        <h2
+            class="section-title title"
+            :class="paddingSize"
+            v-html="t('project.title_site').replace(/\n/g, '<br>')"
+        />
+        <div class="place-self-center flex flex-col items-center">
+          <span class="bg-orange-500 p-2 rounded-xl text-3xl text-white font-semibold">От 350 грн / час</span>
+          <router-link to="/contact" class="mt-2 underline text-blue-600 hover:text-blue-800 text-center">
+            Заказать услугу
+          </router-link>
+        </div>
+      </div>
 
-      <h2
-          class="section-title title"
-          :class="paddingSize"
-          v-html="t('project.title_site').replace(/\n/g, '<br>')"
-      />
       <div class="projects-grid" :class="[gridCols, gapSize, paddingSize]">
         <div
             class="project-card"
@@ -130,14 +150,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { projects } from '@/data/projects';
-import { web_projects } from '@/data/web_projects';
-import { useI18n } from 'vue-i18n';
-import { getImageUrl } from '@/utils/helpers';
-import { useMq } from '@/composables/useMq';
+import {computed} from 'vue'
+import {projects} from '@/data/projects';
+import {web_projects} from '@/data/web_projects';
+import {useI18n} from 'vue-i18n';
+import {getImageUrl} from '@/utils/helpers';
+import {useMq} from '@/composables/useMq';
+import SliderLeftWithContent from "@/views/SliderLeftWithContent.vue";
+import SliderRightWithContent from "@/views/SliderRightWithContent.vue";
 
-const { t, locale } = useI18n();
+const {t, locale} = useI18n();
 const mq = useMq();
 
 const gridCols = computed(() => {

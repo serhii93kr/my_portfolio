@@ -10,11 +10,11 @@ const props = defineProps({
 const { t } = useI18n()
 
 const items = ref([
-  { id: 'faq-1', q: t('faq.q1'), a: t('faq.a1'), open: props.expandFirst },
+  { id: 'faq-1', q: t('faq.q1'), a: t('faq.a1'), open: false },
   { id: 'faq-2', q: t('faq.q2'), a: t('faq.a2'), open: false },
   { id: 'faq-3', q: t('faq.q3'), a: t('faq.a3'), open: false },
   { id: 'faq-4', q: t('faq.q4'), a: t('faq.a4'), open: false },
-  { id: 'faq-5', q: t('faq.q5'), a: t('faq.a5'), open: true && !props.allowOne } // optional extra
+  { id: 'faq-5', q: t('faq.q5'), a: t('faq.a5'), open: false }
 ])
 
 const panelRefs = new Map()
@@ -28,51 +28,40 @@ function registerButton(id, el) {
   if (el) buttonRefs.set(id, el)
 }
 
-async function toggle(id) {
+function toggle(id) {
   const target = items.value.find(i => i.id === id)
   if (!target) return
   const btn = buttonRefs.get(id)
   const prevTop = btn ? btn.getBoundingClientRect().top : null
 
-  if (props.allowOne) {
-    // Close others first
-    for (const it of items.value) {
-      if (it.id !== id && it.open) animateClose(it.id)
-      it.open = it.id === id ? !it.open : false
-    }
-  } else {
-    target.open = !target.open
-  }
+  // Просто меняем состояние текущего элемента
+  target.open = !target.open
 
-  await nextTick()
-  target.open ? animateOpen(id) : animateClose(id)
+  nextTick(() => {
+    target.open ? animateOpen(id) : animateClose(id)
 
-  // Compensate scroll shift to keep clicked question anchored
-  if (btn && prevTop !== null) {
-    requestAnimationFrame(() => {
+    // Scroll compensation
+    if (btn && prevTop !== null) {
       const newTop = btn.getBoundingClientRect().top
       const delta = newTop - prevTop
-      if (Math.abs(delta) > 1) window.scrollBy({ top: delta, left: 0, behavior: 'instant' in window ? 'instant' : 'auto' })
-    })
-  }
+      if (Math.abs(delta) > 1) window.scrollBy({ top: delta, left: 0 })
+    }
+  })
 }
 
 function animateOpen(id) {
   const el = panelRefs.get(id)
   if (!el) return
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (reduce) { el.style.height = 'auto'; el.style.opacity = '1'; el.style.transform = 'none'; return }
-
-  el.style.willChange = 'height, opacity, transform'
-  el.style.transition = 'height 450ms cubic-bezier(0.22,1,0.36,1), opacity 350ms ease, transform 400ms ease'
-  el.style.overflow = 'hidden'
+  el.style.display = 'block' // показываем перед анимацией
+  const h = el.scrollHeight
   el.style.height = '0px'
   el.style.opacity = '0'
   el.style.transform = 'translateY(-6px)'
 
-  const h = el.scrollHeight
   // force reflow
   void el.offsetHeight
+
+  el.style.transition = 'height 450ms cubic-bezier(0.22,1,0.36,1), opacity 350ms ease, transform 400ms ease'
   el.style.height = h + 'px'
   el.style.opacity = '1'
   el.style.transform = 'translateY(0)'
@@ -89,23 +78,22 @@ function animateOpen(id) {
 function animateClose(id) {
   const el = panelRefs.get(id)
   if (!el) return
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (reduce) { el.style.height = '0px'; el.style.opacity = '0'; return }
-
-  el.style.willChange = 'height, opacity, transform'
-  el.style.transition = 'height 380ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease, transform 350ms ease'
-  el.style.overflow = 'hidden'
-  el.style.height = el.scrollHeight + 'px'
+  const h = el.scrollHeight
+  el.style.height = h + 'px'
   el.style.opacity = '1'
   el.style.transform = 'translateY(0)'
+
   // force reflow
   void el.offsetHeight
+
+  el.style.transition = 'height 380ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease, transform 350ms ease'
   el.style.height = '0px'
   el.style.opacity = '0'
   el.style.transform = 'translateY(-6px)'
 
   const onEnd = () => {
     el.style.overflow = ''
+    el.style.display = 'none' // скрываем после закрытия
     el.style.willChange = ''
     el.removeEventListener('transitionend', onEnd)
   }
@@ -142,11 +130,12 @@ function animateClose(id) {
             </span>
           </button>
           <div
-            class="faq-answer"
-            role="region"
-            :id="`${it.id}-panel`"
-            :aria-labelledby="`${it.id}-button`"
-            :ref="(el) => registerPanel(it.id, el)"
+              class="faq-answer"
+              role="region"
+              :id="`${it.id}-panel`"
+              :aria-labelledby="`${it.id}-button`"
+              :ref="(el) => registerPanel(it.id, el)"
+              v-show="it.open"
           >
             <p v-html="it.a" />
           </div>

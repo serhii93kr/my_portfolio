@@ -5,10 +5,16 @@ import BlogView from '../views/BlogView.vue';
 import BlogPostView from '../views/BlogPostView.vue'; // Для отдельного поста
 import PricingView from '../views/PricingView.vue';
 import ContactView from '../views/ContactView.vue';
+import WebDevView from "@/views/WebDevView.vue";
+import MobileDevView from "@/views/MobileDevView.vue";
+
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/portfolio', name: 'Portfolio', component: PortfolioView },
+  { path: '/blog', name: 'Blog', component: BlogView },
+  { path: '/web_dev', name: 'WebDev', component: WebDevView },
+  { path: '/mobile_dev', name: 'MobileDev', component: MobileDevView },
   { path: '/blog', name: 'Blog', component: BlogView },
   { path: '/blog/:slug', name: 'BlogPost', component: BlogPostView, props: true }, // :slug - динамический параметр для поста
   { path: '/pricing', name: 'Pricing', component: PricingView },

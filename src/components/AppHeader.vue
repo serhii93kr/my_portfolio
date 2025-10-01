@@ -81,10 +81,17 @@ const changeLanguage = (lang) => {
             </router-link>
             <router-link
                 class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                to="/blog"
+                to="/web_dev"
                 @click="closeMenu"
             >
-              {{ t('navigation.blog') }}
+              {{ t('navigation.web_dev') }}
+            </router-link>
+            <router-link
+                class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                to="/mobile_dev"
+                @click="closeMenu"
+            >
+              {{ t('navigation.mobile_dev') }}
             </router-link>
             <router-link
                 class="menu-item px-2 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"

@@ -127,54 +127,97 @@ export const projects = [
             uk: 'Roomskey™ (Румскі) — це унікальна цифрова платформа (web + мобільна версія) для повного контролю, управління та комунікації між усіма учасниками проєкту.'
         },
         fullDescription: {
-            en: `
-            <p>Roomskey™ is a unique digital platform (web + mobile version) for complete control, management, and communication between all project participants. The system allows tracking work progress in real-time, exchanging photo, video, and text reports, approving documents, and discussing in the built-in chat.</p>
-            <br>
-            <h3>🔹 Key Features:</h3>
-            <ul>
-              <li>Personal account with roles: client, designer, project manager, and others</li>
-              <li>4 main sections: photos, videos, documents, drawings</li>
-              <li>Flexible access system</li>
-              <li>Interactive menu and simple interface</li>
-              <li>Complete transparency and control at all stages</li>
-            </ul>
-               <br>
-            <h3>🔹 Benefits:</h3>
-            <ul>
-              <li>Web and mobile versions</li>
-              <li>Complete elimination of paperwork</li>
-              <li>Absolute transparency and quick communication</li>
-              <li>Unique tool in the project management market</li>
-            </ul>
-            `,
-            uk: `
-                <p>Roomskey™ (Румскі) — це унікальна цифрова платформа (web + мобільна версія) для повного контролю, 
-                управління та комунікації між усіма учасниками проєкту. Система дозволяє відстежувати хід виконання 
-                робіт у реальному часі, обмінюватися фото-, відео-, та текстовими звітами, погоджувати документи, 
-                а також вести обговорення у вбудованому чаті.</p>
-                </br>
-                <h3> Ключові можливості:</h3>
-                
-                <ul>
-                    <li>Особистий кабінет із ролями: клієнт, дизайнер, керівник проєкту та інші</li>
-                    <li>4 основні розділи: фото, відео, документи, креслення</li>
-                    <li>Гнучка система доступів до функцій</li>
-                    <li>Інтерактивне меню та простий інтерфейс</li>
-                    <li>Повна прозорість і контроль на всіх етапах</li>
-                </ul>
-                <br>
-                <h3> Переваги:</h3>
-                
-                <ul>
-                  <li>Web та мобільна версія</li>
-                  <li>Повна відмова від паперової роботи</li>
-                  <li>Абсолютна прозорість та швидка комунікація</li>
-                  <li>Унікальний інструмент на ринку управління проєктами</li>
-                </ul>
-            `
+            en: [
+                { type: 'img', src: 'room.webp', alt: 'Platform preview' },
+                {
+                    type: 'p',
+                    content:
+                        'Roomskey™ is a unique digital platform (web + mobile version) for complete control, management, and communication between all project participants. The system allows tracking work progress in real-time, exchanging photo, video, and text reports, approving documents, and discussing in the built-in chat.'
+                },
+                {
+                    type: 'slider',
+                    images: [
+                        'room_1.webp',
+                        'room_2.webp',
+                        'room_3.webp',
+                        'room_4.webp',
+                        'room_5.webp',
+                        'room_8.webp',
+                        'room_9.webp',
+                        'room_10.webp',
+                        'room_12.webp',
+                        'room_13.webp',
+                    ]
+                },
+                { type: 'h3', content: '🔹 Key Features:' },
+                {
+                    type: 'ul',
+                    items: [
+                        'Personal account with roles: client, designer, project manager, and others',
+                        '4 main sections: photos, videos, documents, drawings',
+                        'Flexible access system',
+                        'Interactive menu and simple interface',
+                        'Complete transparency and control at all stages'
+                    ]
+                },
+                { type: 'h3', content: '🔹 Benefits:' },
+                {
+                    type: 'ul',
+                    items: [
+                        'Web and mobile versions',
+                        'Complete elimination of paperwork',
+                        'Absolute transparency and quick communication',
+                        'Unique tool in the project management market'
+                    ]
+                }
+            ],
+            uk: [
+                { type: 'img', src: 'room.webp', alt: 'Platform preview' },
+                {
+                    type: 'p',
+                    content:
+                        'Roomskey™ (Румскі) — це унікальна цифрова платформа (web + мобільна версія) для повного контролю, управління та комунікації між усіма учасниками проєкту. Система дозволяє відстежувати хід виконання робіт у реальному часі, обмінюватися фото-, відео-, та текстовими звітами, погоджувати документи, а також вести обговорення у вбудованому чаті.'
+                },
+                {
+                    type: 'slider',
+                    images: [
+                        'room_1.webp',
+                        'room_2.webp',
+                        'room_3.webp',
+                        'room_4.webp',
+                        'room_5.webp',
+                        'room_8.webp',
+                        'room_9.webp',
+                        'room_10.webp',
+                        'room_12.webp',
+                        'room_13.webp',
+
+                    ]
+                },
+                { type: 'h3', content: 'Ключові можливості:' },
+                {
+                    type: 'ul',
+                    items: [
+                        'Особистий кабінет із ролями: клієнт, дизайнер, керівник проєкту та інші',
+                        '4 основні розділи: фото, відео, документи, креслення',
+                        'Гнучка система доступів до функцій',
+                        'Інтерактивне меню та простий інтерфейс',
+                        'Повна прозорість і контроль на всіх етапах'
+                    ]
+                },
+                { type: 'h3', content: 'Переваги:' },
+                {
+                    type: 'ul',
+                    items: [
+                        'Web та мобільна версія',
+                        'Повна відмова від паперової роботи',
+                        'Абсолютна прозорість та швидка комунікація',
+                        'Унікальний інструмент на ринку управління проєктами'
+                    ]
+                },
+            ]
         },
         tags: ['Kotlin', 'Compose', 'Ktor', 'Coroutines', 'MVVM', 'Room', 'Firebase'],
-        image: 'room.webp',
         link: 'https://play.google.com/store/apps/details?id=ua.rk'
     },
     {

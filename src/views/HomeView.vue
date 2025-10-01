@@ -40,7 +40,7 @@ useHead({
 <!--    </section>-->
 
 
-      <ProjectStagesAnimation :step-duration-ms="1600" :autoplay="true" :loop="true" />
+<!--      <ProjectStagesAnimation :step-duration-ms="1600" :autoplay="true" :loop="true" />-->
 
 
     <Projects />

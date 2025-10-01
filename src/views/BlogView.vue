@@ -7,7 +7,8 @@ import {useI18n} from 'vue-i18n';
 import {projects} from '@/data/projects';
 import Hero from '@/views/Hero.vue';
 import BottomBar from '@/views/BottomBar.vue';
-import {getImageUrl} from "@/utils/helpers";
+import {getImageUrl, getImageUrlArr} from "@/utils/helpers";
+import Slider from "@/components/Slider.vue";
 
 const {t, locale} = useI18n();
 const route = useRoute();
@@ -47,22 +48,77 @@ const projectTitle = computed(() => project.value?.title ?? {});
   />
 
   <div v-if="project" class="project-wrapper">
-    <div class="project-content">
-      <img
-          class="project-image"
-          :src="getImageUrl(project.image)"
-          :alt="project.title[locale]"
-      />
+    <div class="project-description other-projects">
+      <template v-for="(block, idx) in project.fullDescription[locale]" :key="idx">
+        <!-- Заголовки -->
+        <h1 v-if="block.type === 'h1'">{{ block.content }}</h1>
+        <h2 v-else-if="block.type === 'h2'">{{ block.content }}</h2>
+        <h3 v-else-if="block.type === 'h3'">{{ block.content }}</h3>
+        <h4 v-else-if="block.type === 'h4'">{{ block.content }}</h4>
+        <h5 v-else-if="block.type === 'h5'">{{ block.content }}</h5>
+        <h6 v-else-if="block.type === 'h6'">{{ block.content }}</h6>
 
-      <h1 class="project-title">{{ project.title[locale] }}</h1>
-      <div class="project-description">
+        <!-- Абзац -->
+        <p v-else-if="block.type === 'p'">{{ block.content }}</p>
 
-        <div class="project-description" v-html="project.fullDescription[locale]"></div>
-      </div>
+        <!-- Картинка -->
+        <img class="m-auto pb-2" v-else-if="block.type === 'img'" :src="getImageUrl(block.src)" :alt="block.alt || ''"/>
 
-      <div class="tags">
-        <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
-      </div>
+        <Slider
+            v-else-if="block.type === 'slider'"
+            :images="block.images.map(img => getImageUrlArr(img))"
+            :visible-slides-config="{ mobile: 2, tablet: 2, desktop: 4, default: 1 }"
+            :autoplay-delay-ms="3000"
+            :gap="32"
+        />
+
+        <!-- Списки -->
+        <!-- Маркированный список -->
+        <ul
+            v-else-if="block.type === 'ul'"
+            class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300"
+        >
+          <li v-for="(item, i) in block.items" :key="i" class="pl-2">
+            {{ item }}
+          </li>
+        </ul>
+
+        <!-- Нумерованный список -->
+        <ol
+            v-else-if="block.type === 'ol'"
+            class="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300"
+        >
+          <li v-for="(item, i) in block.items" :key="i" class="pl-2">
+            {{ item }}
+          </li>
+        </ol>
+
+        <!-- Цитата -->
+        <blockquote v-else-if="block.type === 'blockquote'">
+          {{ block.content }}
+        </blockquote>
+
+        <!-- Код -->
+        <pre v-else-if="block.type === 'code'">
+      <code :class="block.language">{{ block.content }}</code>
+    </pre>
+
+        <!-- Слайдер -->
+        <MySlider v-else-if="block.type === 'slider'" :images="block.images" />
+
+        <!-- Видео -->
+        <video v-else-if="block.type === 'video'" controls>
+          <source :src="block.src" :type="block.mime || 'video/mp4'" />
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Любой кастомный компонент -->
+        <component
+            v-else-if="block.type === 'component'"
+            :is="block.name"
+            v-bind="block.props"
+        />
+      </template>
     </div>
 
     <!-- Other Projects Section -->
